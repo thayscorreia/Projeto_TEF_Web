@@ -7,14 +7,16 @@
                 <h3>Cadastro Formas de Pagamentos</h3>    
             </div>
             <div class="card-body">
-                <label>Quantidade Parcela</label>
-                <input type="number" placeholder="1" class="form-control">
-                <label>Forma de Pagamento</label>
-                <input type="text" placeholder="Digite a forma de Pagamento..." class="form-control">
-                <label>Desconto</label>
-                <input type="number" placeholder="Digite o valor do desconto" class="form-control">
-                <br>
-                <button class="btn btn-success">Salvar</button>        
+                <form method="POST" action="/salvarFormaPagamento">
+                    <label>Opcao Parcela</label>
+                    <input type="number" placeholder="Digite a Opção da Parcela ex. 1" class="form-control" name="opcaoParcela">
+                    <label>Descrição da Forma de Pagamento</label>
+                    <input type="text" placeholder="Digite a forma de Pagamento..." class="form-control" name="descricao">
+                    <label>Desconto</label>
+                    <input type="number" placeholder="Digite o valor do desconto" class="form-control" name="desconto">
+                    <br>
+                    <button class="btn btn-success">Salvar</button>        
+                </form>
             </div>
         </div>
     </div>
