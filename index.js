@@ -7,8 +7,8 @@ app.get("/",(req, res, next) => {
     res.render("index")
 })
 
-app.get("/cadastroTef", (req,res,next) =>{
-    res.render('cadastroTef')
+app.get("/cadastroFormaPagamento", (req,res,next) =>{
+    res.render('cadastroFormaPagamento')
 })
 
 app.listen(8082, () =>{
