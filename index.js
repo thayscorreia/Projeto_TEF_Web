@@ -1,6 +1,11 @@
-const express = require('express')
+// import { openDb } from './controller/api_config'
+// openDb()
+
+import express from 'express'
 const app = express()
-const bodyParser = require('body-parser')
+import bodyParser from 'body-parser'
+
+
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
