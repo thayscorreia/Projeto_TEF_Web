@@ -1,12 +1,13 @@
-// import { openDb } from './controller/api_config'
-// openDb()
 
 import express from 'express'
 const app = express()
 import bodyParser from 'body-parser'
 
+import { openDb } from './controller/api_config.js'
+import { createTable } from './controller/api_sql.js'
 
-
+openDb();
+createTable();
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
