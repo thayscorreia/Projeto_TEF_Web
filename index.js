@@ -3,11 +3,11 @@ import express from 'express'
 const app = express()
 import bodyParser from 'body-parser'
 
-import { openDb } from './controller/api_config.js'
-import { createTable } from './controller/api_sql.js'
+import {createTableCadastroPagto, createTablePagto}  from './controller/controller.js'
 
-openDb();
-createTable();
+createTableCadastroPagto()
+createTablePagto()
+
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 

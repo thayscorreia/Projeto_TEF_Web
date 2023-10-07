@@ -1,10 +1,8 @@
 import sqlite3 from 'sqlite3'
-import { open } from 'sqlite'
 
-// you would have to import / invoke this in another file
-export async function openDb () {
-  return open({
-    filename: '../database.db',
-    driver: sqlite3.Database
-  })
-}
+const db = new sqlite3.Database('./database_tef.db', sqlite3.OPEN_READWRITE, (err) => {
+  if(err) return console.error(err.message)
+})
+
+
+export { db }
