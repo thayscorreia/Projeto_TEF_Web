@@ -35,7 +35,7 @@ const sql = {
     selectTableCadastroPagto() {
         const sql =
             `
-            SELECT ID, DESCRICAO_PAGAMENTO, OPCAO, DESCONTO, DATA_CRIACAO, DATA_ATUALIZACAO 
+            SELECT id, DESCRICAO_PAGAMENTO, OPCAO, DESCONTO, DATA_CRIACAO, DATA_ATUALIZACAO 
             FROM CADASTRO_PAGAMENTO
         `
         return sql
@@ -47,16 +47,16 @@ const sql = {
             INSERT INTO CADASTRO_PAGAMENTO 
                 ( DESCRICAO_PAGAMENTO, OPCAO, DESCONTO, DATA_CRIACAO, DATA_ATUALIZACAO )
             VALUES 
-                (?, ?, ?, ?, ?)
+                (?, ?, ?, DATETIME(), ?)
         `
         return sql
     },
 
-    updateTableCadastroPagto(ID, campos) {
+    updateTableCadastroPagto(ID) {
         const sql =
             `
             UPDATE CADASTRO_PAGAMENTO 
-                SET 
+                SET DESCRICAO_PAGAMENTO = ?, OPCAO = ? , DESCONTO = ? , DATA_ATUALIZACAO = DATETIME()
             WHERE id = ${ID}
         `
         return sql
@@ -65,7 +65,7 @@ const sql = {
     deleteTableCadastroPagto(ID) {
         const sql =
             `
-            DELETE CADASTRO_PAGAMENTO 
+            DELETE FROM CADASTRO_PAGAMENTO 
             WHERE id = ${ID}
         `
         return sql

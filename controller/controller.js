@@ -53,11 +53,11 @@ const insertTableCadastroPagto = async function (descricao, opcao, desconto) {
         let sqlQuery = sql.insertTableCadastroPagto()
 
         let result = new Promise((resolve, reject) => {
-            db.run(sqlQuery, [descricao, opcao, desconto, new Date().getTime(), null], (err) => {
+            db.run(sqlQuery, [descricao, opcao, desconto, null], (err) => {
                 if (err)
-                    (err)
+                    reject(err)
                 else {
-                resolve()
+                    resolve()
                 }
             })
         })
@@ -68,13 +68,18 @@ const insertTableCadastroPagto = async function (descricao, opcao, desconto) {
     }
 }
 
-const updateTableCadastroPagto = async function (id, campos) {
+const updateTableCadastroPagto = async function (id, descricao, opcao, desconto) {
     try {
-        let sqlQuery = sql.updateTableCadastroPagto()
+        let sqlQuery = sql.updateTableCadastroPagto(id)
 
-        let result = await db.run(sqlQuery, [descricao, opcao, desconto, new Date().getTime(), null], (err) => {
-            if (err)
-                return console.error(err.message)
+        let result = new Promise((resolve, reject) => {
+            db.run(sqlQuery, [descricao, opcao, desconto], (err) => {
+                if (err)
+                    reject(err)
+                else {
+                    resolve()
+                }
+            })
         })
         return result
 
@@ -87,8 +92,15 @@ const deleteTableCadastroPagto = async function (id) {
     try {
         let sqlQuery = sql.deleteTableCadastroPagto(id)
 
-        let result = await db.exec(sqlQuery)
-        console.log(result)
+        let result = new Promise((resolve, reject) => {
+            db.run(sqlQuery, [], (err) => {
+                if (err)
+                    reject(err)
+                else {
+                    resolve()
+                }
+            })
+        })
 
         return result
 

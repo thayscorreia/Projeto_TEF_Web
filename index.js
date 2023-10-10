@@ -24,11 +24,13 @@ app.get("/",(req, res, next) => {
     res.render("index")
 })
 
-app.get("/obterFormasPagamentos", (req, res , next) => {
+app.get("/cadastroFormaPagamento", (req, res , next) => {
     try {
         async function obterFormasPagto(){
             const formaPagamento = await selectTableCadastroPagto()
-            res.redirect("/cadastroFormaPagamento")
+            res.render("cadastroFormaPagamento", {
+                formasPagamento: formaPagamento
+            })
         }
         obterFormasPagto()
 
@@ -37,20 +39,40 @@ app.get("/obterFormasPagamentos", (req, res , next) => {
     }
 })
 
-app.get("/cadastroFormaPagamento", (req,res,next) =>{
-    res.render('cadastroFormaPagamento')
-})
-
 app.post("/salvarFormaPagamento", (req,res,next) =>{
+
+    const id = parseInt(req.body.id)
     const opcaoParcela = req.body.opcaoParcela
     const descricao = req.body.descricao
     const desconto = req.body.desconto
+    
     async function inserirFormaPagamento(){
         const formaPagamento = await insertTableCadastroPagto( descricao, opcaoParcela, desconto)
         
-        res.redirect("/obterFormasPagamentos")
+        res.redirect("/cadastroFormaPagamento")
     }
-    inserirFormaPagamento()
+    
+    async function atualizarFormaPagamento(){
+        const formaPagamento = await updateTableCadastroPagto( id, descricao, opcaoParcela, desconto)
+        
+        res.redirect("/cadastroFormaPagamento")
+    }
+    if(id){
+        atualizarFormaPagamento()
+    }else{
+        inserirFormaPagamento()
+    }
+    
+})
+app.get("/excluirFormaPagto/:id", (req,res,next) =>{
+    const id = parseInt(req.params.id)
+    async function deletarFormaPagamento(){
+        const formaPagamento = await deleteTableCadastroPagto( id )
+        
+        res.redirect("/cadastroFormaPagamento")
+    }
+    if(id)
+        deletarFormaPagamento()
     
 })
 
