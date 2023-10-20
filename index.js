@@ -21,7 +21,13 @@ app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
 app.get("/",(req, res, next) => {
-    res.render("index")
+    async function obterFormasPagto(){
+        const formaPagamento = await selectTableCadastroPagto()
+        res.render("index", {
+            formasPagamento: formaPagamento
+        })
+    }
+    obterFormasPagto()
 })
 
 app.get("/cadastroFormaPagamento", (req, res , next) => {
