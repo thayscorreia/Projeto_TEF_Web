@@ -9,6 +9,8 @@ import {  createTableCadastroPagto
     , insertTableCadastroPagto
     , updateTableCadastroPagto
     , deleteTableCadastroPagto
+    , insertPagto
+    , selectTablePagto
 }  from './controller/controller.js'
 
 createTableCadastroPagto()
@@ -23,8 +25,10 @@ app.use(bodyParser.json())
 app.get("/",(req, res, next) => {
     async function obterFormasPagto(){
         const formaPagamento = await selectTableCadastroPagto()
+        const pagamentos = await selectTablePagto()
         res.render("index", {
-            formasPagamento: formaPagamento
+            formasPagamento: formaPagamento,
+            pagamentos: pagamentos
         })
     }
     obterFormasPagto()
@@ -70,6 +74,7 @@ app.post("/salvarFormaPagamento", (req,res,next) =>{
     }
     
 })
+
 app.get("/excluirFormaPagto/:id", (req,res,next) =>{
     const id = parseInt(req.params.id)
     async function deletarFormaPagamento(){
@@ -84,14 +89,17 @@ app.get("/excluirFormaPagto/:id", (req,res,next) =>{
 
 app.post("/salvarPagamento", (req,res,next) =>{
     const preco = req.body.preco
-    const formaPagamento = req.body.formaPagamento
+    const formaPagamento = req.body.idFormaPagamento
     const desconto = req.body.desconto
     const valorTotalCompra = req.body.valorTotalCompra
-    res.send(`Pagamento Realizado! 
-                Preço: ${preco} - 
-                formaPagamento: ${formaPagamento} -
-                desconto: ${desconto} -
-                valorTotalCompra: ${valorTotalCompra}`)
+
+    async function inserirPagamento(){
+        const pagamento = await insertPagto( preco, desconto, valorTotalCompra,formaPagamento)
+        
+        res.redirect("/")
+    }
+
+    inserirPagamento()
 })
 
 app.listen(8082, () =>{
