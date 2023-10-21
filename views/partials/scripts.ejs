@@ -1,23 +1,9 @@
 <script>
-    function calculaDesconto(){
+    function calculaDesconto(desconto){        
         var preco = parseInt(document.getElementById("preco").value)
-        var formaPagamento = document.getElementById("formaPagamento").value
-        var valorDesconto = document.getElementById("desconto").value
-        var valorTotalCompra = document.getElementById("valorTotalCompra").value
 
-        var desconto
-        
-        if(formaPagamento == "À vista dinheiro/cheque"){
-            desconto = 10
-        }else if (formaPagamento == "À vista cartão"){
-            desconto = 5
-        }else if (formaPagamento == "2x no cartão"){
-            desconto = 0
-        }else if (formaPagamento == "3x ou mais no cartão"){
-            desconto = 0
-        }
-        document.getElementById("desconto").value = desconto
-        document.getElementById("valorTotalCompra").value = (preco - (preco * desconto / 100))
+        document.getElementById("desconto").value = parseInt(desconto)
+        document.getElementById("valorTotalCompra").value = (preco - (preco * parseInt(desconto) / 100))
     }
     function limparFormularioPagamento(){
         document.getElementById("preco").value = ""
@@ -25,5 +11,8 @@
         document.getElementById("desconto").value = ""
         document.getElementById("valorTotalCompra").value = ""
     }
+    document.querySelector('select').addEventListener('change', function(){
+        calculaDesconto(this.value)
+    });
 </script>
 </html>

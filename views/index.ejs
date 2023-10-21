@@ -11,15 +11,15 @@
                     <label>Valor Produto</label>
                     <input type="number" placeholder="Digite o Valor à pagar" class="form-control" Id="preco" name="preco">
                     <label>Forma Pagamento</label>
-                    <select class="form-control" Id="formaTipoPagamento" name="formaTipoPagamento" oninput="calculaDesconto()">
+                    <select class="form-control" Id="formaTipoPagamento" name="formaTipoPagamento">
                         <option selected>Selecione a forma de Pagamento</option>
                         <% formasPagamento.forEach(formaPagamento => { %>
-                            <option onclick="calculaDesconto('<%= formaPagamento.DESCRICAO_PAGAMENTO %>')"><%=formaPagamento.DESCRICAO_PAGAMENTO %></option>
+                            <option value="<%=formaPagamento.DESCONTO %>"><%=formaPagamento.DESCRICAO_PAGAMENTO %></option>
                         <% }) %>
                         
                     </select>
-                    <label>Desconto</label>
-                    <input type="number" placeholder="Valor do Desconto" class="form-control" id="desconto" name="desconto" readonly>
+                    <label>Porcentagem Desconto (%)</label>
+                    <input type="number" placeholder="Valor do Desconto em Porcentagem %" class="form-control" id="desconto" name="desconto" readonly>
                     <label>Valor Total Compra</label>
                     <input type="number" placeholder="Valor da compra com Desconto" class="form-control" name="valorTotalCompra" id='valorTotalCompra'readonly>
                     <br>
@@ -27,7 +27,7 @@
                 </form>                
             </div>
         </div>            
-    </div>    
+    </div>  
 </body>
 <%- include ('partials/footer.ejs') %>
 <%- include ('partials/scripts.ejs') %>
