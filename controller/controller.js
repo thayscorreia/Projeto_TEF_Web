@@ -109,6 +109,47 @@ const deleteTableCadastroPagto = async function (id) {
     }
 }
 
+const selectTablePagto = async function () {
+    try {
+        let sqlQuery = sql.selectTablePagto()
+
+        let retorno = new Promise((resolve, reject) => {
+            db.all(sqlQuery,
+                (err, rows) => {
+                    if (err)
+                        reject(err)
+                    else {
+                        resolve(rows)
+                    }
+                });
+        })
+        return retorno
+
+    } catch (err) {
+        console.error(err)
+    }
+}
+
+const insertPagto = async function (preco, desconto, valorTotalCompra,formaPagamento) {
+    try {
+        let sqlQuery = sql.insertTablePagto()
+
+        let result = new Promise((resolve, reject) => {
+            db.run(sqlQuery, [preco, desconto, valorTotalCompra, formaPagamento], (err) => {
+                if (err)
+                    reject(err)
+                else {
+                    resolve()
+                }
+            })
+        })
+        return result
+
+    } catch (err) {
+        console.error(err)
+    }
+}
+
 export {
     createTableCadastroPagto
     , createTablePagto
@@ -116,4 +157,6 @@ export {
     , insertTableCadastroPagto
     , updateTableCadastroPagto
     , deleteTableCadastroPagto
+    , insertPagto
+    , selectTablePagto
 }

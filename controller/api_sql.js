@@ -69,7 +69,27 @@ const sql = {
             WHERE id = ${ID}
         `
         return sql
-    }
+    },
+
+    selectTablePagto() {
+        const sql =
+            `
+                SELECT id, VALOR_PRODUTO, VALOR_DESCONTO, VALOR_COMPRA, DATA_CRIACAO, FORMA_PAGAMENTO 
+                FROM PAGAMENTO
+            `
+        return sql
+    },
+
+    insertTablePagto() {
+        const sql =
+            `
+            INSERT INTO PAGAMENTO 
+                ( VALOR_PRODUTO, VALOR_DESCONTO, VALOR_COMPRA, DATA_CRIACAO, FORMA_PAGAMENTO )
+            VALUES 
+                (?, ?, ?, DATETIME(), ?)
+        `
+        return sql
+    },
 
 }
 

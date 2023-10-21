@@ -8,13 +8,14 @@
             </div>
             <div class="card-body">
                 <form method="POST" action="/salvarPagamento">
+                    <input type="hidden" name="idFormaPagamento" id="idFormaPagamento">
                     <label>Valor Produto</label>
                     <input type="number" placeholder="Digite o Valor à pagar" class="form-control" Id="preco" name="preco">
                     <label>Forma Pagamento</label>
                     <select class="form-control" Id="formaTipoPagamento" name="formaTipoPagamento">
                         <option selected>Selecione a forma de Pagamento</option>
                         <% formasPagamento.forEach(formaPagamento => { %>
-                            <option value="<%=formaPagamento.DESCONTO %>"><%=formaPagamento.DESCRICAO_PAGAMENTO %></option>
+                            <option value="<%= JSON.stringify(formaPagamento) %>"><%=formaPagamento.DESCRICAO_PAGAMENTO %></option>
                         <% }) %>
                         
                     </select>

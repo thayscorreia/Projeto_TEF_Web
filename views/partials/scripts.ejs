@@ -1,9 +1,16 @@
 <script>
-    function calculaDesconto(desconto){        
+    function calculaDesconto(value){
+
+        document.getElementById("idFormaPagamento").value = ""
         var preco = parseInt(document.getElementById("preco").value)
 
+        let formaPagto = JSON.parse(value)
+
+        let desconto  = formaPagto.DESCONTO
+        let idFormaPagamento  = formaPagto.idFormaPagamento
         document.getElementById("desconto").value = parseInt(desconto)
         document.getElementById("valorTotalCompra").value = (preco - (preco * parseInt(desconto) / 100))
+        document.getElementById("idFormaPagamento").value = formaPagto.id
     }
     function limparFormularioPagamento(){
         document.getElementById("preco").value = ""
