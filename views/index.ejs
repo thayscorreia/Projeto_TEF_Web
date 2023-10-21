@@ -28,7 +28,43 @@
                 </form>                
             </div>
         </div>            
-    </div>  
+    </div>
+    <div class="container">
+        <div class="card">
+            
+            <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Valor Produto</th>
+                        <th>forma de Pagamento</th>
+                        <th>Desconto (em % )</th>
+                        <th>valor da Compra</th>
+                        <th>Data da Compra</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% pagamentos.forEach(pagamento => { %>
+                            <tr>
+                                <td><%=pagamento.VALOR_PRODUTO %></td>
+                                <td><%=pagamento.DESCRICAO_PAGAMENTO %></td>
+                                <td><%=pagamento.VALOR_DESCONTO %></td>
+                                <td><%=pagamento.VALOR_COMPRA %></td>
+                                <td><%=pagamento.DATA_CRIACAO %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>ValorProduto</th>
+                        <th>forma de Pagamento</th>
+                        <th>Desconto (em % )</th>
+                        <th>valor da Compra</th>
+                        <th>Data da Compra</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 </body>
 <%- include ('partials/footer.ejs') %>
 <%- include ('partials/scripts.ejs') %>

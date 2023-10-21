@@ -74,8 +74,15 @@ const sql = {
     selectTablePagto() {
         const sql =
             `
-                SELECT id, VALOR_PRODUTO, VALOR_DESCONTO, VALOR_COMPRA, DATA_CRIACAO, FORMA_PAGAMENTO 
-                FROM PAGAMENTO
+                SELECT PAGTO.id
+                        , VALOR_PRODUTO
+                        , VALOR_DESCONTO
+                        , VALOR_COMPRA
+                        , PAGTO.DATA_CRIACAO
+                        , FORMA_PAGAMENTO 
+                        , CP.DESCRICAO_PAGAMENTO AS DESCRICAO_PAGAMENTO
+                FROM PAGAMENTO PAGTO
+                INNER JOIN CADASTRO_PAGAMENTO CP ON CP.id = PAGTO.FORMA_PAGAMENTO
             `
         return sql
     },
